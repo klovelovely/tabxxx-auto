@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="page-container">
+    <button id="changeColor"></button>
+
+    <div id="app">
+      <h3>大于 24 小时的标签页 - {{existTabsOver24H.length}} / {{tabs.length}}</h3>
+      <ol class="tab-list J_tab-list">
+        <li v-for="tab in existTabsOver24H" @click="switchTab(tab.windowId, tab.index)" class="tab-item">
+          <button @click="closeTab(tab.id)"> X </button>
+          最后更新于 {{ new Date(tab.lastUpdateTime) | moment("from", "now") }} - <a href="javascript:"><img class="favicon" :src="tab.favIconUrl">{{tab.title}}</a>
+        </li>
+      </ol>
+      <h3>小于 24 小时的标签页 - {{existTabsBelow24H.length}} / {{tabs.length}}</h3>
+      <ol class="tab-list J_tab-list">
+        <li v-for="tab in existTabsBelow24H" @click="switchTab(tab.windowId, tab.index)" class="tab-item">
+          <button @click="closeTab(tab.id)"> X </button>
+          最后更新于 {{ new Date(tab.lastUpdateTime) | moment("from", "now") }} - <a href="javascript:"><img class="favicon" :src="tab.favIconUrl">{{tab.title}}</a>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+</body>
+
+</html>

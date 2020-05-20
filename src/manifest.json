@@ -1,0 +1,37 @@
+{
+  "name": "今日 tab 今日币",
+  "version": "1.0",
+  "description": "所以我们的提醒 临界值是 24 小时 ",
+  "permissions": ["tabs", "activeTab", "declarativeContent", "storage"],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/logo240.png",
+      "32": "images/logo240.png",
+      "48": "images/logo240.png",
+      "128": "images/logo240.png"
+    }
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+G",
+        "mac": "MacCtrl+Shift+G"
+      },
+      "description": "Opens hello.html"
+    }
+  },
+  "icons": {
+    "16": "images/logo240.png",
+    "32": "images/logo240.png",
+    "48": "images/logo240.png",
+    "128": "images/logo240.png"
+  },
+  "manifest_version": 2
+}
