@@ -1,66 +1,68 @@
-body {
-    margin: 0;
-}
-
 html, body, .page-container {
-    width: 800px;
+  width: 800px;
 }
 
-button {
-    height: 30px;
-    width: 30px;
-    outline: none;
-    background: none;
+.bar {
+  padding: .5em;
 }
 
 .tab-list {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .tab-list .tab-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
 .tab-list .tab-item > * {
-    margin: 0 5px;
+  margin: 0 5px;
+}
+
+.tab-list .tab-item img {
+  margin: 0 5px;
+}
+
+.tab-list .tab-item .desc {
+  color: #bbb;
 }
 
 .tab-list .tab-item,
-.tab-list .tab-item a{
-    color: #4a4c53;
-    background: white;
+.tab-list .tab-item a {
+  color: #4a4c53;
+  background-color: white;
 }
 
 .tab-list .tab-item:hover,
 .tab-list .tab-item:hover a,
 .tab-list .tab-item:active,
 .tab-list .tab-item:active a {
-    color: white;
-    background: black;
+  color: white;
+  background-color: black;
 }
 
 .tab-list .tab-item button {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .tab-list .tab-item:hover button,
 .tab-list .tab-item:active button {
-    visibility: visible;
-    color: black;
-    background: white;
+  visibility: visible;
+  color: black;
+  background-color: white;
 }
 
 .tab-list .tab-item a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .tab-list .tab-item .favicon {
-    width: 2em;
-    height: auto;
+  width: 2em;
+  height: auto;
 }

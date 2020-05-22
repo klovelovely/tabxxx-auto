@@ -2,31 +2,53 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="popup.css">
+    <meta charset="UTF-8">
 </head>
 
 <body>
-  <div class="page-container">
-    <button id="changeColor"></button>
-
-    <div id="app">
-      <h3>大于 24 小时的标签页 - {{existTabsOver24H.length}} / {{tabs.length}}</h3>
-      <ol class="tab-list J_tab-list">
-        <li v-for="tab in existTabsOver24H" @click="switchTab(tab.windowId, tab.index)" class="tab-item">
-          <button @click="closeTab(tab.id)"> X </button>
-          最后更新于 {{ new Date(tab.lastUpdateTime) | moment("from", "now") }} - <a href="javascript:"><img class="favicon" :src="tab.favIconUrl">{{tab.title}}</a>
-        </li>
-      </ol>
-      <h3>小于 24 小时的标签页 - {{existTabsBelow24H.length}} / {{tabs.length}}</h3>
-      <ol class="tab-list J_tab-list">
-        <li v-for="tab in existTabsBelow24H" @click="switchTab(tab.windowId, tab.index)" class="tab-item">
-          <button @click="closeTab(tab.id)"> X </button>
-          最后更新于 {{ new Date(tab.lastUpdateTime) | moment("from", "now") }} - <a href="javascript:"><img class="favicon" :src="tab.favIconUrl">{{tab.title}}</a>
-        </li>
-      </ol>
+<div id="app" class="page-container disable-user-select">
+    <div class="bar">
+        <button id="changeColor" class="btn-circle"></button>
+        <button @click="updateTabs()" class="btn-circle btn-icon btn-icon-refresh" title="当你觉得有问题时，试一下这个 :)">刷新 tab 缓存</button>
     </div>
-  </div>
+    <!--<textarea name="" id="" cols="120" rows="20">{{JSON.stringify(tabs,null,4)}}</textarea>-->
+
+    <div class="panel" v-if="existTabsOver24H.length > 0">
+        <div class="panel-header">
+            <h3 class="center-block">
+                大于 24 小时的标签页 - {{existTabsOver24H.length}} / {{tabs.length}}
+                <button v-if="existTabsOver24H.length > 0" @click="removeMultipleTabs(existTabsOver24H)" title="关闭当前组内所有标签页" class="btn-circle btn-icon btn-icon-x invisible-default"> ×</button>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <ol class="tab-list J_tab-list">
+                <li v-for="tab in existTabsOver24H" @click="switchTab(tab.windowId, tab.index)" class="tab-item">
+                    <button @click.stop="closeTab(tab.id)" class="btn-circle btn-icon btn-icon-x"> ×️</button>
+                    <a href="javascript:"><img class="favicon" :src="tab.favIconUrl">{{tab.title}}</a>
+                    <span class="desc">最后更新于 {{ new Date(tab.lastUpdateTime) | moment("from", "now") }}</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="panel" v-if="existTabsBelow24H.length > 0">
+        <div class="panel-header">
+            <h3 class="center-block">
+                小于 24 小时的标签页 - {{existTabsBelow24H.length}} / {{tabs.length}}
+                <button @click="removeMultipleTabs(existTabsBelow24H)" title="关闭当前组内所有标签页" class="btn-circle btn-icon btn-icon-x invisible-default"> ×</button>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <ol class="tab-list J_tab-list">
+                <li v-for="tab in existTabsBelow24H" @click="switchTab(tab.windowId, tab.index)" class="tab-item">
+                    <button @click.stop="closeTab(tab.id)" class="btn-circle btn-icon btn-icon-x"> ×️</button>
+                    <a href="javascript:"><img class="favicon" :src="tab.favIconUrl">{{tab.title}}</a>
+                    <span class="desc">最后更新于 {{ new Date(tab.lastUpdateTime) | moment("from", "now") }}</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
 
 </body>
 
